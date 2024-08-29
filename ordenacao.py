@@ -1,3 +1,9 @@
+import time
+import sys
+
+# Defina um novo limite de recursão
+sys.setrecursionlimit(150000)
+
 # implementação dos algoritmos de ordenação
 
 def bubble_sort(arr):
@@ -109,3 +115,123 @@ def counting_sort(arr):
 
     for i in range(len(arr)):
         arr[i] = output[i]
+
+
+def random(inc, fim, stp, rps):
+    import random
+
+    print("[[RANDOM]]")
+    print("n      Bubble      Insertion       Merge       Heap        Quick       Counting")
+    print("-------------------------------------------------------------------------------")
+
+    for j in range(inc, fim+1, stp):
+        vetor = [random.randint(-250, 250) for i in range(inc)]
+
+        vetorCopia = vetor.copy()
+        for i in range(rps):
+
+            inicio = time.time()
+            bubble_sort(vetorCopia)
+            fim = time.time()
+            tempoBub =+ (fim - inicio)
+    ################################################
+
+        vetorCopia = vetor.copy()
+        for i in range(rps):
+
+            inicio = time.time()
+            quick_sort(vetorCopia, 0, inc - 1)
+            fim = time.time()
+
+            tempoQuick =+ (fim - inicio)
+    ###############################################
+
+        vetorCopia = vetor.copy()
+        for i in range(rps):
+
+            inicio = time.time()
+            insertion_sort(vetorCopia)
+            fim = time.time()
+            tempoIns =+ (fim - inicio)
+    ###############################################
+
+        vetorCopia = vetor.copy()
+        for i in range(rps):
+
+            inicio = time.time()
+            merge_sort(vetorCopia)
+            fim = time.time()
+            tempoMer =+ (fim - inicio)
+    ###############################################
+
+        vetorCopia = vetor.copy()
+        for i in range(rps):
+
+            inicio = time.time()
+            heap_sort(vetorCopia)
+            fim = time.time()
+
+            tempoHeap =+ (fim - inicio)
+    ###############################################
+
+        vetorCopia = vetor.copy()
+        for i in range(rps):
+
+            inicio = time.time()
+            counting_sort(vetorCopia)
+            fim = time.time()
+
+            tempoCount =+ (fim - inicio)
+
+        print(f"{inc}  {(tempoBub/rps):.6f}     {(tempoIns/rps):.6f}     {(tempoMer/rps):.6f}     {(tempoHeap/rps):.6f}    {(tempoQuick/rps):.6f}     {(tempoCount/rps):.6f}")
+        inc = inc + stp
+
+
+
+
+#aqui vai vir a "main" e dentro dela vai ter o print
+inc = int(input("Insira o valor inicial do vetor de entrada: "))
+fim = int(input("Insira o valor final do vetor de entrada: "))
+stp = int(input("Insira o valor do intervalo entre dois incs: "))
+rps = int(input("Insira quantas repeticoes serao executadas: "))
+
+random(inc, fim, stp, rps)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#vai ter q ter um laco de repeticao onde um vetor de inc inc vai ser
+#ordenado em todos os 6 metodos rps vezes
+#a cada ordenacao vamo ter q ir somando o tempo das execucoes pra
+#depois dividir por rps e obter a media de tempo para CADA algoritmo (q b.o kkkkk)
+#DEPOIS vamo ter q aumentar o inc do vetor (incVetor =+ stp)
+#ai ordena mais varias vezes pega a media e soma -> incVetor =+ stp
+
+#TUDO ISSO pra cada TIPO de vetor q vai ser criado (RANDOM, REVERSE, SORTED e NEARLY SORTED)
+#e vamo ter q faze roda kkkkkkkkkkkkkkkkkk
+#morra higa 
+
