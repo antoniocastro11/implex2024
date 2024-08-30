@@ -1,26 +1,55 @@
 import time
 import sys
+import random
 
 # Defina um novo limite de recursão
 sys.setrecursionlimit(150000)
 
-# implementação dos algoritmos de ordenação
+def counting_sort(arr):
+    max_val = max(arr)
+    min_val = min(arr)
+    range_val = max_val - min_val + 1
+    count = [0] * range_val
+    output = [0] * len(arr)
 
-def bubble_sort(arr):
+    for num in arr:
+        count[num - min_val] += 1
+
+    for i in range(1, len(count)):
+        count[i] += count[i-1]
+
+    for num in arr:
+        output[count[num - min_val] - 1] = num
+        count[num - min_val] -= 1
+
+    for i in range(len(arr)):
+        arr[i] = output[i]
+
+def heapify(arr, n, i):
+    maior = i
+    esquerda = 2 * i + 1
+    direita = 2 * i + 2
+
+    if esquerda < n and arr[i] < arr[esquerda]:
+        maior = esquerda
+
+    if direita < n and arr[maior] < arr[direita]:
+        maior = direita
+
+    if maior != i:
+        arr[i], arr[maior] = arr[maior], arr[i]
+        heapify(arr, n, maior)
+
+def heap_sort(arr):
     n = len(arr)
-    for i in range(n-1):
-        for j in range(0, n-i-1):
-            if arr[j] > arr[j+1]:
-                arr[j], arr[j+1] = arr[j+1], arr[j]
 
-def insertion_sort(arr):
-    for i in range(1, len(arr)):
-        chave = arr[i]
-        j = i-1
-        while j >= 0 and arr[j] > chave:
-            arr[j+1] = arr[j]
-            j -= 1
-        arr[j+1] = chave
+    for i in range(n//2 - 1, -1, -1):
+        heapify(arr, n, i)
+
+    for i in range(n-1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]
+        heapify(arr, i, 0)
+
 
 def merge_sort(arr):
     if len(arr) > 1:
@@ -52,30 +81,21 @@ def merge_sort(arr):
             j += 1
             k += 1
 
-def heapify(arr, n, i):
-    maior = i
-    esquerda = 2 * i + 1
-    direita = 2 * i + 2
+def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        chave = arr[i]
+        j = i-1
+        while j >= 0 and arr[j] > chave:
+            arr[j+1] = arr[j]
+            j -= 1
+        arr[j+1] = chave
 
-    if esquerda < n and arr[i] < arr[esquerda]:
-        maior = esquerda
-
-    if direita < n and arr[maior] < arr[direita]:
-        maior = direita
-
-    if maior != i:
-        arr[i], arr[maior] = arr[maior], arr[i]
-        heapify(arr, n, maior)
-
-def heap_sort(arr):
+def bubble_sort(arr):
     n = len(arr)
-
-    for i in range(n//2 - 1, -1, -1):
-        heapify(arr, n, i)
-
-    for i in range(n-1, 0, -1):
-        arr[i], arr[0] = arr[0], arr[i]
-        heapify(arr, i, 0)
+    for i in range(n-1):
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
 
 def partition(arr, baixo, alto):
     i = baixo - 1
@@ -96,142 +116,262 @@ def quick_sort(arr, baixo, alto):
         quick_sort(arr, baixo, pi-1)
         quick_sort(arr, pi+1, alto)
 
-def counting_sort(arr):
-    max_val = max(arr)
-    min_val = min(arr)
-    range_val = max_val - min_val + 1
-    count = [0] * range_val
-    output = [0] * len(arr)
 
-    for num in arr:
-        count[num - min_val] += 1
-
-    for i in range(1, len(count)):
-        count[i] += count[i-1]
-
-    for num in arr:
-        output[count[num - min_val] - 1] = num
-        count[num - min_val] -= 1
-
-    for i in range(len(arr)):
-        arr[i] = output[i]
+inc = int(input("insira o tamanhgo inicial do vetora ser ordenado   "))
+fim = int(input("Insira o valor final do vetor de entrada caralho:  "))
+stp = int(input("Insira o valor do intervalo entre dois tamanhos porra: "))
+rps = int(input("Insira quantas repeticoes serao executadas caralo: "))
 
 
-def random(inc, fim, stp, rps):
-    import random
+def my_random(inc, fim, stp, rps):
 
     print("[[RANDOM]]")
     print("n      Bubble      Insertion       Merge       Heap        Quick       Counting")
     print("-------------------------------------------------------------------------------")
 
     for j in range(inc, fim+1, stp):
-        vetor = [random.randint(-250, 250) for i in range(inc)]
+        vetor = [random.randint(0, inc*inc) for i in range(inc)]
 
         vetorCopia = vetor.copy()
+        tempoBub = 0
         for i in range(rps):
-
-            inicio = time.time()
+            inicio = time.perf_counter()
             bubble_sort(vetorCopia)
-            fim = time.time()
-            tempoBub =+ (fim - inicio)
-    ################################################
+            final = time.perf_counter()
+            tempoBub += (final - inicio)
 
         vetorCopia = vetor.copy()
+        tempoQuick = 0
         for i in range(rps):
-
-            inicio = time.time()
+            inicio = time.perf_counter()
             quick_sort(vetorCopia, 0, inc - 1)
-            fim = time.time()
-
-            tempoQuick =+ (fim - inicio)
-    ###############################################
+            final = time.perf_counter()
+            tempoQuick += (final - inicio)
 
         vetorCopia = vetor.copy()
+        tempoIns = 0
         for i in range(rps):
-
-            inicio = time.time()
+            inicio = time.perf_counter()
             insertion_sort(vetorCopia)
-            fim = time.time()
-            tempoIns =+ (fim - inicio)
-    ###############################################
+            final = time.perf_counter()
+            tempoIns += (final - inicio)
 
         vetorCopia = vetor.copy()
+        tempoMer = 0
         for i in range(rps):
-
-            inicio = time.time()
+            inicio = time.perf_counter()
             merge_sort(vetorCopia)
-            fim = time.time()
-            tempoMer =+ (fim - inicio)
-    ###############################################
+            final = time.perf_counter()
+            tempoMer += (final - inicio)
 
         vetorCopia = vetor.copy()
+        tempoHeap = 0
         for i in range(rps):
-
-            inicio = time.time()
+            inicio = time.perf_counter()
             heap_sort(vetorCopia)
-            fim = time.time()
-
-            tempoHeap =+ (fim - inicio)
-    ###############################################
+            final = time.perf_counter()
+            tempoHeap += (final - inicio)
 
         vetorCopia = vetor.copy()
+        tempoCount = 0
         for i in range(rps):
-
-            inicio = time.time()
+            inicio = time.perf_counter()
             counting_sort(vetorCopia)
-            fim = time.time()
-
-            tempoCount =+ (fim - inicio)
+            final = time.perf_counter()
+            tempoCount += (final - inicio)
 
         print(f"{inc}  {(tempoBub/rps):.6f}     {(tempoIns/rps):.6f}     {(tempoMer/rps):.6f}     {(tempoHeap/rps):.6f}    {(tempoQuick/rps):.6f}     {(tempoCount/rps):.6f}")
         inc = inc + stp
 
 
+def reverse(inc, fim, stp, rps):
 
+    print("[[REVERSE]]")
+    print("n      Bubble      Insertion       Merge       Heap        Quick       Counting")
+    print("-------------------------------------------------------------------------------")
 
-#aqui vai vir a "main" e dentro dela vai ter o print
-inc = int(input("Insira o valor inicial do vetor de entrada: "))
-fim = int(input("Insira o valor final do vetor de entrada: "))
-stp = int(input("Insira o valor do intervalo entre dois incs: "))
-rps = int(input("Insira quantas repeticoes serao executadas: "))
+    for j in range(inc, fim+1, stp):
+        vetor = list(range(inc, 0, -1))
 
-random(inc, fim, stp, rps)
+        vetorCopia = vetor.copy()
+        tempoBub = 0
+        for i in range(rps):
+            inicio = time.perf_counter()
+            bubble_sort(vetorCopia)
+            final = time.perf_counter()
+            tempoBub += (final - inicio)
 
+        vetorCopia = vetor.copy()
+        tempoQuick = 0
+        for i in range(rps):
+            inicio = time.perf_counter()
+            quick_sort(vetorCopia, 0, inc - 1)
+            final = time.perf_counter()
+            tempoQuick += (final - inicio)
 
+        vetorCopia = vetor.copy()
+        tempoIns = 0
+        for i in range(rps):
+            inicio = time.perf_counter()
+            insertion_sort(vetorCopia)
+            final = time.perf_counter()
+            tempoIns += (final - inicio)
 
+        vetorCopia = vetor.copy()
+        tempoMer = 0
+        for i in range(rps):
+            inicio = time.perf_counter()
+            merge_sort(vetorCopia)
+            final = time.perf_counter()
+            tempoMer += (final - inicio)
 
+        vetorCopia = vetor.copy()
+        tempoHeap = 0
+        for i in range(rps):
+            inicio = time.perf_counter()
+            heap_sort(vetorCopia)
+            final = time.perf_counter()
+            tempoHeap += (final - inicio)
 
+        vetorCopia = vetor.copy()
+        tempoCount = 0
+        for i in range(rps):
+            inicio = time.perf_counter()
+            counting_sort(vetorCopia)
+            final = time.perf_counter()
+            tempoCount += (final - inicio)
 
+        print(f"{inc}  {(tempoBub/rps):.6f}     {(tempoIns/rps):.6f}     {(tempoMer/rps):.6f}     {(tempoHeap/rps):.6f}    {(tempoQuick/rps):.6f}     {(tempoCount/rps):.6f}")
+        inc = inc + stp
 
+def sorted(inc, fim, stp, rps):
 
+    print("[[SORTED]]")
+    print("n      Bubble      Insertion       Merge       Heap        Quick       Counting")
+    print("-------------------------------------------------------------------------------")
 
+    for j in range(inc, fim+1, stp):
+        vetor = list(range(inc))
 
+        vetorCopia = vetor.copy()
+        tempoBub = 0
+        for i in range(rps):
+            inicio = time.perf_counter()
+            bubble_sort(vetorCopia)
+            final = time.perf_counter()
+            tempoBub += (final - inicio)
 
+        vetorCopia = vetor.copy()
+        tempoQuick = 0
+        for i in range(rps):
+            inicio = time.perf_counter()
+            quick_sort(vetorCopia, 0, inc - 1)
+            final = time.perf_counter()
+            tempoQuick += (final - inicio)
 
+        vetorCopia = vetor.copy()
+        tempoIns = 0
+        for i in range(rps):
+            inicio = time.perf_counter()
+            insertion_sort(vetorCopia)
+            final = time.perf_counter()
+            tempoIns += (final - inicio)
 
+        vetorCopia = vetor.copy()
+        tempoMer = 0
+        for i in range(rps):
+            inicio = time.perf_counter()
+            merge_sort(vetorCopia)
+            final = time.perf_counter()
+            tempoMer += (final - inicio)
 
+        vetorCopia = vetor.copy()
+        tempoHeap = 0
+        for i in range(rps):
+            inicio = time.perf_counter()
+            heap_sort(vetorCopia)
+            final = time.perf_counter()
+            tempoHeap += (final - inicio)
 
+        vetorCopia = vetor.copy()
+        tempoCount = 0
+        for i in range(rps):
+            inicio = time.perf_counter()
+            counting_sort(vetorCopia)
+            final = time.perf_counter()
+            tempoCount += (final - inicio)
 
+        print(f"{inc}  {(tempoBub/rps):.6f}     {(tempoIns/rps):.6f}     {(tempoMer/rps):.6f}     {(tempoHeap/rps):.6f}    {(tempoQuick/rps):.6f}     {(tempoCount/rps):.6f}")
+        inc = inc + stp
 
+def nearly(inc, fim, stp, rps):
 
+    print("[[NEARLY SORTED]]")
+    print("n      Bubble      Insertion       Merge       Heap        Quick       Counting")
+    print("-------------------------------------------------------------------------------")
 
+    for j in range(inc, fim+1, stp):
+        vetor = list(range(inc-1))
+        vetor.append(0)
 
+        vetorCopia = vetor.copy()
+        tempoBub = 0
+        for i in range(rps):
+            inicio = time.perf_counter()
+            bubble_sort(vetorCopia)
+            final = time.perf_counter()
+            tempoBub += (final - inicio)
 
+        vetorCopia = vetor.copy()
+        tempoQuick = 0
+        for i in range(rps):
+            inicio = time.perf_counter()
+            quick_sort(vetorCopia, 0, inc - 1)
+            final = time.perf_counter()
+            tempoQuick += (final - inicio)
 
+        vetorCopia = vetor.copy()
+        tempoIns = 0
+        for i in range(rps):
+            inicio = time.perf_counter()
+            insertion_sort(vetorCopia)
+            final = time.perf_counter()
+            tempoIns += (final - inicio)
 
+        vetorCopia = vetor.copy()
+        tempoMer = 0
+        for i in range(rps):
+            inicio = time.perf_counter()
+            merge_sort(vetorCopia)
+            final = time.perf_counter()
+            tempoMer += (final - inicio)
 
+        vetorCopia = vetor.copy()
+        tempoHeap = 0
+        for i in range(rps):
+            inicio = time.perf_counter()
+            heap_sort(vetorCopia)
+            final = time.perf_counter()
+            tempoHeap += (final - inicio)
 
+        vetorCopia = vetor.copy()
+        tempoCount = 0
+        for i in range(rps):
+            inicio = time.perf_counter()
+            counting_sort(vetorCopia)
+            final = time.perf_counter()
+            tempoCount += (final - inicio)
 
+        print(f"{inc}  {(tempoBub/rps):.6f}     {(tempoIns/rps):.6f}     {(tempoMer/rps):.6f}     {(tempoHeap/rps):.6f}    {(tempoQuick/rps):.6f}     {(tempoCount/rps):.6f}")
+        inc = inc + stp
 
-
-#vai ter q ter um laco de repeticao onde um vetor de inc inc vai ser
-#ordenado em todos os 6 metodos rps vezes
-#a cada ordenacao vamo ter q ir somando o tempo das execucoes pra
-#depois dividir por rps e obter a media de tempo para CADA algoritmo (q b.o kkkkk)
-#DEPOIS vamo ter q aumentar o inc do vetor (incVetor =+ stp)
-#ai ordena mais varias vezes pega a media e soma -> incVetor =+ stp
-
-#TUDO ISSO pra cada TIPO de vetor q vai ser criado (RANDOM, REVERSE, SORTED e NEARLY SORTED)
-#e vamo ter q faze roda kkkkkkkkkkkkkkkkkk
-#morra higa 
-
+my_random(inc, fim, stp, rps)
+print()
+print()
+reverse(inc, fim, stp, rps)
+print()
+print()
+sorted(inc, fim, stp, rps)
+print()
+print()
+nearly(inc, fim, stp, rps)
