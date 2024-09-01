@@ -117,10 +117,10 @@ def quick_sort(arr, baixo, alto):
         quick_sort(arr, pi+1, alto)
 
 
-inc = int(input("insira o tamanhgo inicial do vetora ser ordenado   "))
-fim = int(input("Insira o valor final do vetor de entrada caralho:  "))
-stp = int(input("Insira o valor do intervalo entre dois tamanhos porra: "))
-rps = int(input("Insira quantas repeticoes serao executadas caralo: "))
+inc = int(input("tamanho incial do vetor de entrada: "))
+fim = int(input("tamanho final do vetor de entrada:  "))
+stp = int(input("valor do 'stepper': "))
+rps = int(input("número de repetições: "))
 
 
 def my_random(inc, fim, stp, rps):
