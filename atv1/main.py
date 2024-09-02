@@ -20,7 +20,7 @@ def my_random(inc, fim, stp, rps):
     print("-------------------------------------------------------------------------------")
 
     for j in range(inc, fim+1, stp):
-        vetor = [random.randint(0, inc*inc) for i in range(inc)]
+        vetor = random.sample(range(1, fim+1), j)
 
         vetorCopia = vetor.copy()
         tempoBub = 0
@@ -34,7 +34,8 @@ def my_random(inc, fim, stp, rps):
         tempoQuick = 0
         for i in range(rps):
             inicio = time.perf_counter()
-            quick_sort(vetorCopia, 0, inc - 1)
+            quick_sort(vetorCopia, 0, j - 1)
+
             final = time.perf_counter()
             tempoQuick += (final - inicio)
 
@@ -75,16 +76,16 @@ def my_random(inc, fim, stp, rps):
 
 # calculo do tempo do vetor REVERSE
 def reverse(inc, fim, stp, rps):
-
     print("[[REVERSE]]")
     print("n      Bubble      Insertion       Merge       Heap        Quick       Counting")
     print("-------------------------------------------------------------------------------")
 
     for j in range(inc, fim+1, stp):
-        vetor = list(range(inc, 0, -1))
-
+        #preencher vetor de j a 1
+        vetor = list(range(j, 0, -1))
         vetorCopia = vetor.copy()
         tempoBub = 0
+
         for i in range(rps):
             inicio = time.perf_counter()
             bubble_sort(vetorCopia)
@@ -95,7 +96,9 @@ def reverse(inc, fim, stp, rps):
         tempoQuick = 0
         for i in range(rps):
             inicio = time.perf_counter()
-            quick_sort(vetorCopia, 0, inc - 1)
+            quick_sort(vetorCopia, 0, j - 1)
+
+
             final = time.perf_counter()
             tempoQuick += (final - inicio)
 
@@ -142,7 +145,8 @@ def sorted(inc, fim, stp, rps):
     print("-------------------------------------------------------------------------------")
 
     for j in range(inc, fim+1, stp):
-        vetor = list(range(inc))
+        #preencher vetor ordenado de 1 a j
+        vetor = list(range(1, j+1))
 
         vetorCopia = vetor.copy()
         tempoBub = 0
@@ -156,7 +160,9 @@ def sorted(inc, fim, stp, rps):
         tempoQuick = 0
         for i in range(rps):
             inicio = time.perf_counter()
-            quick_sort(vetorCopia, 0, inc - 1)
+            quick_sort(vetorCopia, 0, j - 1)
+
+
             final = time.perf_counter()
             tempoQuick += (final - inicio)
 
@@ -203,8 +209,7 @@ def nearly(inc, fim, stp, rps):
     print("-------------------------------------------------------------------------------")
 
     for j in range(inc, fim+1, stp):
-        vetor = list(range(inc-1))
-        vetor.append(0)
+        vetor = random.sample(range(1, fim+1), j)
 
         vetorCopia = vetor.copy()
         tempoBub = 0
@@ -218,7 +223,9 @@ def nearly(inc, fim, stp, rps):
         tempoQuick = 0
         for i in range(rps):
             inicio = time.perf_counter()
-            quick_sort(vetorCopia, 0, inc - 1)
+            quick_sort(vetorCopia, 0, j - 1)
+
+
             final = time.perf_counter()
             tempoQuick += (final - inicio)
 

@@ -1,23 +1,17 @@
 # ALGORITMO DE ORDENAÇÃO COUNTINGSORT
 def counting_sort(arr):
     max_val = max(arr)
-    min_val = min(arr)
-    range_val = max_val - min_val + 1
-    count = [0] * range_val
-    output = [0] * len(arr)
+    count = [0] * (max_val + 1)
 
     for num in arr:
-        count[num - min_val] += 1
+        count[num] += 1
 
-    for i in range(1, len(count)):
-        count[i] += count[i-1]
-
-    for num in arr:
-        output[count[num - min_val] - 1] = num
-        count[num - min_val] -= 1
-
-    for i in range(len(arr)):
-        arr[i] = output[i]
+    index = 0
+    for i in range(len(count)):
+        while count[i] > 0:
+            arr[index] = i
+            index += 1
+            count[i] -= 1
 
 # ALGORITMO DE ORDENAÇÃO HEAPSORT
 def heapify(arr, n, i):
@@ -94,22 +88,22 @@ def bubble_sort(arr):
             if arr[j] > arr[j+1]:
                 arr[j], arr[j+1] = arr[j+1], arr[j]
 
+
+# ALGORITMO DE ORDENAÇÃO QUICKSORT
 def partition(arr, baixo, alto):
     i = baixo - 1
     pivo = arr[alto]
 
     for j in range(baixo, alto):
-        if arr[j] < pivo:
+        if arr[j] <= pivo:
             i += 1
             arr[i], arr[j] = arr[j], arr[i]
 
-    arr[i+1], arr[alto] = arr[alto], arr[i+1]
-    return i+1
+    arr[i + 1], arr[alto] = arr[alto], arr[i + 1]
+    return i + 1
 
-# ALGORITMO DE ORDENAÇÃO QUICKSORT
 def quick_sort(arr, baixo, alto):
     if baixo < alto:
         pi = partition(arr, baixo, alto)
-
-        quick_sort(arr, baixo, pi-1)
-        quick_sort(arr, pi+1, alto)
+        quick_sort(arr, baixo, pi - 1)
+        quick_sort(arr, pi + 1, alto)
