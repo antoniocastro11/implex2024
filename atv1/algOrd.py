@@ -1,3 +1,4 @@
+import random
 # ALGORITMO DE ORDENAÇÃO COUNTINGSORT
 def counting_sort(arr):
     max_val = max(arr)
@@ -91,6 +92,10 @@ def bubble_sort(arr):
 
 # ALGORITMO DE ORDENAÇÃO QUICKSORT
 def partition(arr, baixo, alto):
+    # Escolhe um pivô aleatório
+    rand_index = random.randint(baixo, alto)
+    arr[rand_index], arr[alto] = arr[alto], arr[rand_index]
+    
     i = baixo - 1
     pivo = arr[alto]
 
