@@ -4,15 +4,20 @@ def counting_sort(arr):
     max_val = max(arr)
     count = [0] * (max_val + 1)
 
-    for num in arr:
+    while len(arr) > 0:
+        num = arr.pop(0)
         count[num] += 1
 
-    index = 0
     for i in range(len(count)):
         while count[i] > 0:
-            arr[index] = i
-            index += 1
+            arr.append(i)
             count[i] -= 1
+
+# Teste do algoritmo
+vetor = [926, 1622, 385, 144, 1632, 785, 688, 1647, 542, 617, 1116, 2421, 1332, 2210, 1025, 2390, 1975, 1145, 1578, 1147, 1750, 2286, 2276, 1553, 440, 993, 328, 872, 1033, 1324, 1653, 666, 165, 800, 1680, 10, 500, 643, 2130, 1506, 1025, 1002, 1052, 2302, 1951, 262, 1773, 1238, 1277, 2289]
+counting_sort(vetor)
+print("Vetor ordenado:")
+print(vetor)
 
 # ALGORITMO DE ORDENAÇÃO HEAPSORT
 def heapify(arr, n, i):
@@ -39,6 +44,12 @@ def heap_sort(arr):
     for i in range(n-1, 0, -1):
         arr[i], arr[0] = arr[0], arr[i]
         heapify(arr, i, 0)
+
+# Teste do algoritmo
+vetor = [4, 2, 6, 8, 1, 3, 7, 5]
+heap_sort(vetor)
+print("Vetor ordenado:")
+print(vetor)
 
 # ALGORITMO DE ORDENAÇÃO MERGESORT
 def merge_sort(arr):
@@ -71,6 +82,12 @@ def merge_sort(arr):
             j += 1
             k += 1
 
+# Teste do algoritmo
+vetor = [4, 2, 6, 8, 1, 3, 7, 5]
+merge_sort(vetor)
+print("Vetor ordenado:")
+print(vetor)
+
 # ALGORITMO DE ORDENAÇÃO INSERTIONSORT
 def insertion_sort(arr):
     for i in range(1, len(arr)):
@@ -81,6 +98,12 @@ def insertion_sort(arr):
             j -= 1
         arr[j+1] = chave
 
+# Teste do algoritmo
+vetor = [4, 2, 6, 8, 1, 3, 7, 5]
+insertion_sort(vetor)
+print("Vetor ordenado:")
+print(vetor)
+
 # ALGORITMO DE ORDENAÇÃO BUBBLESORT
 def bubble_sort(arr):
     n = len(arr)
@@ -88,6 +111,12 @@ def bubble_sort(arr):
         for j in range(0, n-i-1):
             if arr[j] > arr[j+1]:
                 arr[j], arr[j+1] = arr[j+1], arr[j]
+
+# Teste do algoritmo
+vetor = [4, 2, 6, 8, 1, 3, 7, 5]
+bubble_sort(vetor)
+print("Vetor ordenado:")
+print(vetor)
 
 
 # ALGORITMO DE ORDENAÇÃO QUICKSORT
@@ -112,3 +141,29 @@ def quick_sort(arr, baixo, alto):
         pi = partition(arr, baixo, alto)
         quick_sort(arr, baixo, pi - 1)
         quick_sort(arr, pi + 1, alto)
+
+
+# Teste do algoritmo
+vetor = [4, 2, 6, 8, 1, 3, 7, 5]
+quick_sort(vetor, 0, len(vetor) - 1)
+print("Vetor ordenado:")
+print(vetor)
+
+##############################################################################################################
+
+def ordenar_90_porcento(vetor):
+    # Calcular 90% do comprimento do vetor
+    tamanho_vetor = len(vetor)
+    tamanho_ordem = int(tamanho_vetor * 0.9)
+    
+    # Dividir o vetor em duas partes
+    parte_a_ser_ordenada = vetor[:tamanho_ordem]
+    parte_inalterada = vetor[tamanho_ordem:]
+    
+    # Ordenar a parte que precisa ser ordenada
+    parte_a_ser_ordenada.sort()
+    
+    # Combinar as duas partes
+    vetor_ordenado = parte_a_ser_ordenada + parte_inalterada
+    
+    return vetor_ordenado
