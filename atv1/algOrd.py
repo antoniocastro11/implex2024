@@ -13,11 +13,6 @@ def counting_sort(arr):
             arr.append(i)
             count[i] -= 1
 
-# Teste do algoritmo
-vetor = [926, 1622, 385, 144, 1632, 785, 688, 1647, 542, 617, 1116, 2421, 1332, 2210, 1025, 2390, 1975, 1145, 1578, 1147, 1750, 2286, 2276, 1553, 440, 993, 328, 872, 1033, 1324, 1653, 666, 165, 800, 1680, 10, 500, 643, 2130, 1506, 1025, 1002, 1052, 2302, 1951, 262, 1773, 1238, 1277, 2289]
-counting_sort(vetor)
-print("Vetor ordenado:")
-print(vetor)
 
 # ALGORITMO DE ORDENAÇÃO HEAPSORT
 def heapify(arr, n, i):
@@ -45,11 +40,6 @@ def heap_sort(arr):
         arr[i], arr[0] = arr[0], arr[i]
         heapify(arr, i, 0)
 
-# Teste do algoritmo
-vetor = [4, 2, 6, 8, 1, 3, 7, 5]
-heap_sort(vetor)
-print("Vetor ordenado:")
-print(vetor)
 
 # ALGORITMO DE ORDENAÇÃO MERGESORT
 def merge_sort(arr):
@@ -82,11 +72,6 @@ def merge_sort(arr):
             j += 1
             k += 1
 
-# Teste do algoritmo
-vetor = [4, 2, 6, 8, 1, 3, 7, 5]
-merge_sort(vetor)
-print("Vetor ordenado:")
-print(vetor)
 
 # ALGORITMO DE ORDENAÇÃO INSERTIONSORT
 def insertion_sort(arr):
@@ -143,11 +128,6 @@ def quick_sort(arr, baixo, alto):
         quick_sort(arr, pi + 1, alto)
 
 
-# Teste do algoritmo
-vetor = [4, 2, 6, 8, 1, 3, 7, 5]
-quick_sort(vetor, 0, len(vetor) - 1)
-print("Vetor ordenado:")
-print(vetor)
 
 ##############################################################################################################
 
