@@ -1,24 +1,28 @@
 import random
 # ALGORITMO DE ORDENAÇÃO COUNTINGSORT
 def counting_sort(arr):
-    if len(arr) == 0:
-        return
+    if len(arr) == 0:  # Verificar se o array não está vazio
+        return arr
     
+    # Encontrar o valor máximo no array
     max_val = max(arr)
+    
+    # Inicializar o array de contagem
     count = [0] * (max_val + 1)
-
-    # Contagem de cada elemento
+    
+    # Contar as ocorrências de cada valor
     for num in arr:
         count[num] += 1
-
-    # Reconstruir o array original com os valores ordenados
-    arr_idx = 0
+    
+    # Reconstruir o array original ordenado
+    index = 0
     for i in range(len(count)):
         while count[i] > 0:
-            arr[arr_idx] = i
-            arr_idx += 1
+            arr[index] = i
+            index += 1
             count[i] -= 1
 
+    return arr
 
 
 # ALGORITMO DE ORDENAÇÃO HEAPSORT
@@ -90,6 +94,11 @@ def insertion_sort(arr):
             j -= 1
         arr[j+1] = chave
 
+# Teste do algoritmo
+vetor = [4, 2, 6, 8, 1, 3, 7, 5]
+insertion_sort(vetor)
+print("Vetor ordenado:")
+print(vetor)
 
 # ALGORITMO DE ORDENAÇÃO BUBBLESORT
 def bubble_sort(arr):
@@ -99,6 +108,11 @@ def bubble_sort(arr):
             if arr[j] > arr[j+1]:
                 arr[j], arr[j+1] = arr[j+1], arr[j]
 
+# Teste do algoritmo
+vetor = [4, 2, 6, 8, 1, 3, 7, 5]
+bubble_sort(vetor)
+print("Vetor ordenado:")
+print(vetor)
 
 
 # ALGORITMO DE ORDENAÇÃO QUICKSORT
