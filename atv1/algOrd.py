@@ -94,11 +94,6 @@ def insertion_sort(arr):
             j -= 1
         arr[j+1] = chave
 
-# Teste do algoritmo
-vetor = [4, 2, 6, 8, 1, 3, 7, 5]
-insertion_sort(vetor)
-print("Vetor ordenado:")
-print(vetor)
 
 # ALGORITMO DE ORDENAÇÃO BUBBLESORT
 def bubble_sort(arr):
@@ -107,12 +102,6 @@ def bubble_sort(arr):
         for j in range(0, n-i-1):
             if arr[j] > arr[j+1]:
                 arr[j], arr[j+1] = arr[j+1], arr[j]
-
-# Teste do algoritmo
-vetor = [4, 2, 6, 8, 1, 3, 7, 5]
-bubble_sort(vetor)
-print("Vetor ordenado:")
-print(vetor)
 
 
 # ALGORITMO DE ORDENAÇÃO QUICKSORT
