@@ -94,7 +94,7 @@ def insertion_sort(arr):
         arr[j+1] = chave
 
 
-# ALGORITMO DE ORDENAÇÃO BUBBLESORT
+# ALGORITMO DE ORDENAÇÃO BUBBLESORT 
 def bubble_sort(arr):
     n = len(arr)
     while n > 1:
@@ -131,18 +131,14 @@ def quick_sort(arr, baixo, alto):
 
 # funcao para ordenar 90% do vetor para o caso de teste NEARLY SORTED
 def ordenar_90_porcento(vetor):
-    # Calcular 90% do comprimento do vetor
     tamanho_vetor = len(vetor)
     tamanho_ordem = int(tamanho_vetor * 0.9)
     
-    # Dividir o vetor em duas partes
     parte_a_ser_ordenada = vetor[:tamanho_ordem]
     parte_inalterada = vetor[tamanho_ordem:]
     
-    # Ordenar a parte que precisa ser ordenada
     parte_a_ser_ordenada.sort()
     
-    # Combinar as duas partes
     vetor_ordenado = parte_a_ser_ordenada + parte_inalterada
     
     return vetor_ordenado

@@ -34,7 +34,7 @@ def my_random(inc, fim, stp, rps):
     for j in range(inc, fim+1, stp):
 
         for i in range(rps):
-            # gerar numeros no intervalo [0, j^2]
+            # gerar numeros no intervalo [0, j]
             vetor = [random.randint(0, j) for _ in range(j)]  
             tempoBub = tempoQuick = tempoIns = tempoMer = tempoHeap = tempoCount = 0
 
@@ -270,13 +270,13 @@ def nearly(inc, fim, stp):
 
 
 
-#my_random(inc, fim, stp, rps)
+my_random(inc, fim, stp, rps)
 print()
 print()
-#reverse(inc, fim, stp)
+reverse(inc, fim, stp)
 print()
 print()
 sorted(inc, fim, stp)
 print()
 print()
-#nearly(inc, fim, stp)
+nearly(inc, fim, stp)
