@@ -1,20 +1,16 @@
 import random
 # ALGORITMO DE ORDENAÇÃO COUNTINGSORT
 def counting_sort(arr):
-    if len(arr) == 0:  # Verificar se o array não está vazio
+    if len(arr) == 0: 
         return arr
     
-    # Encontrar o valor máximo no array
     max_val = max(arr)
     
-    # Inicializar o array de contagem
     count = [0] * (max_val + 1)
     
-    # Contar as ocorrências de cada valor
     for num in arr:
         count[num] += 1
     
-    # Reconstruir o array original ordenado
     index = 0
     for i in range(len(count)):
         while count[i] > 0:
@@ -94,11 +90,6 @@ def insertion_sort(arr):
             j -= 1
         arr[j+1] = chave
 
-# Teste do algoritmo
-vetor = [4, 2, 6, 8, 1, 3, 7, 5]
-insertion_sort(vetor)
-print("Vetor ordenado:")
-print(vetor)
 
 # ALGORITMO DE ORDENAÇÃO BUBBLESORT
 def bubble_sort(arr):
@@ -108,16 +99,9 @@ def bubble_sort(arr):
             if arr[j] > arr[j+1]:
                 arr[j], arr[j+1] = arr[j+1], arr[j]
 
-# Teste do algoritmo
-vetor = [4, 2, 6, 8, 1, 3, 7, 5]
-bubble_sort(vetor)
-print("Vetor ordenado:")
-print(vetor)
-
 
 # ALGORITMO DE ORDENAÇÃO QUICKSORT
 def partition(arr, baixo, alto):
-    # Escolhe um pivô aleatório
     rand_index = random.randint(baixo, alto)
     arr[rand_index], arr[alto] = arr[alto], arr[rand_index]
     
@@ -138,9 +122,6 @@ def quick_sort(arr, baixo, alto):
         quick_sort(arr, baixo, pi - 1)
         quick_sort(arr, pi + 1, alto)
 
-
-
-##############################################################################################################
 
 def ordenar_90_porcento(vetor):
     # Calcular 90% do comprimento do vetor

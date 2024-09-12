@@ -1,7 +1,7 @@
 import time
 import sys
 import random
-from algOrd import counting_sort, heapify, heap_sort, merge_sort, insertion_sort, bubble_sort, partition, quick_sort, ordenar_90_porcento
+from func import counting_sort, heapify, heap_sort, merge_sort, insertion_sort, bubble_sort, partition, quick_sort, ordenar_90_porcento
 
 # limite de recursão
 sys.setrecursionlimit(150000)
@@ -129,7 +129,7 @@ def reverse(inc, fim, stp):
         final = time.perf_counter()
         tempoCount = final - inicio
 
-        # Exibir resultados para o tamanho atual (j) do vetor
+        # Exibir resultados para o tamanho atual do vetor
         print(f"{j}  {(tempoBub):.6f}     {(tempoIns):.6f}     {(tempoMer):.6f}     {(tempoHeap):.6f}    {(tempoQuick):.6f}     {(tempoCount):.6f}")
 
 def sorted(inc, fim, stp):
@@ -188,7 +188,7 @@ def sorted(inc, fim, stp):
         final = time.perf_counter()
         tempoCount = final - inicio
 
-        # Exibir resultados para o tamanho atual (j) do vetor
+        # Exibir resultados para o tamanho atual do vetor
         print(f"{j}  {(tempoBub):.6f}     {(tempoIns):.6f}     {(tempoMer):.6f}     {(tempoHeap):.6f}    {(tempoQuick):.6f}     {(tempoCount):.6f}")
 
 def nearly(inc, fim, stp):
@@ -248,7 +248,7 @@ def nearly(inc, fim, stp):
         final = time.perf_counter()
         tempoCount = final - inicio
 
-        # Exibir resultados para o tamanho atual (j) do vetor
+        # Exibir resultados para o tamanho atual do vetor
         print(f"{j}  {(tempoBub):.6f}     {(tempoIns):.6f}     {(tempoMer):.6f}     {(tempoHeap):.6f}    {(tempoQuick):.6f}     {(tempoCount):.6f}")
 
 
