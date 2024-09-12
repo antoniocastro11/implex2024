@@ -1,4 +1,7 @@
+#Alunos: Antonio Galvan Castro e João Pedro da Cruz Silva de Camargo
+
 import random
+
 # ALGORITMO DE ORDENAÇÃO COUNTINGSORT
 def counting_sort(arr):
     if len(arr) == 0: 
@@ -18,7 +21,7 @@ def counting_sort(arr):
             index += 1
             count[i] -= 1
 
-    return arr
+    
 
 
 # ALGORITMO DE ORDENAÇÃO HEAPSORT
@@ -94,10 +97,14 @@ def insertion_sort(arr):
 # ALGORITMO DE ORDENAÇÃO BUBBLESORT
 def bubble_sort(arr):
     n = len(arr)
-    for i in range(n-1):
-        for j in range(0, n-i-1):
-            if arr[j] > arr[j+1]:
-                arr[j], arr[j+1] = arr[j+1], arr[j]
+    while n > 1:
+        newn = 0
+        for i in range(1, n):
+            if arr[i - 1] > arr[i]:
+                # Troca os elementos
+                arr[i - 1], arr[i] = arr[i], arr[i - 1]
+                newn = i
+        n = newn
 
 
 # ALGORITMO DE ORDENAÇÃO QUICKSORT
@@ -122,7 +129,7 @@ def quick_sort(arr, baixo, alto):
         quick_sort(arr, baixo, pi - 1)
         quick_sort(arr, pi + 1, alto)
 
-
+# funcao para ordenar 90% do vetor para o caso de teste NEARLY SORTED
 def ordenar_90_porcento(vetor):
     # Calcular 90% do comprimento do vetor
     tamanho_vetor = len(vetor)

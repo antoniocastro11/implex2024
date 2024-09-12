@@ -1,16 +1,18 @@
+#Alunos: Antonio Galvan Castro e João Pedro da Cruz Silva de Camargo
+
 import time
 import sys
 import random
 from func import counting_sort, heapify, heap_sort, merge_sort, insertion_sort, bubble_sort, partition, quick_sort, ordenar_90_porcento
 
-# limite de recursão
+# aumentando limite de recurção utilizando a biblioteca sys
 sys.setrecursionlimit(150000)
 
 # entrada dos valores iniciais, pedidos no enunciado
 inc = int(input("tamanho incial do vetor de entrada: "))
 
 fim = int(input("tamanho final do vetor de entrada:  "))
-while fim <= inc:
+while fim <= inc: # certificando que o valor final do vetor inserido pelo usuário seja maior que o valor inicial
     print("O valor final do vetor não pode ser menor ou igual ao valor inicial")
     fim = int(input("novo valor final do vetor de entrada: "))
 
@@ -21,9 +23,10 @@ while stp == 0:
     
 rps = int(input("número de repetições: "))
 
-# calculo do tempo do vetor RANDOM
+# calculo do tempo do vetor aleatorio
 def my_random(inc, fim, stp, rps):
 
+    # prints do cabeçalho dos dados do vetor aleatorio
     print("[[RANDOM]]")
     print("n      Bubble      Insertion       Merge       Heap        Quick       Counting")
     print("-------------------------------------------------------------------------------")
@@ -31,54 +34,66 @@ def my_random(inc, fim, stp, rps):
     for j in range(inc, fim+1, stp):
 
         for i in range(rps):
-            # Gerar números no intervalo [0, j^2]
-            vetor = [random.randint(0, j*j) for _ in range(j)]  
+            # gerar numeros no intervalo [0, j^2]
+            vetor = [random.randint(0, j) for _ in range(j)]  
             tempoBub = tempoQuick = tempoIns = tempoMer = tempoHeap = tempoCount = 0
 
+            # vetorCopia recebe os valores do vetor aleatorio
             vetorCopia = vetor.copy()
-            inicio = time.perf_counter()
+            inicio = time.perf_counter() # marca o tempo inicial do chamamento da funcao
             bubble_sort(vetorCopia)
-            final = time.perf_counter()
-            tempoBub += (final - inicio)
+            final = time.perf_counter() # marca o tempo final do chamamento da funcao
+            tempoBub += (final - inicio) # guarda o tempo gasto para executar a funcao
 
+            # vetorCopia recebe os valores do vetor aleatorio
             vetorCopia = vetor.copy()
-            inicio = time.perf_counter()
+            inicio = time.perf_counter() # marca o tempo inicial do chamamento da funcao
             quick_sort(vetorCopia, 0, j - 1)
-            final = time.perf_counter()
-            tempoQuick += (final - inicio)
+            final = time.perf_counter() # marca o tempo final do chamamento da funcao
+            tempoQuick += (final - inicio) # guarda o tempo gasto para executar a funcao
 
+            # vetorCopia recebe os valores do vetor aleatorio
             vetorCopia = vetor.copy()
-            inicio = time.perf_counter()
+            inicio = time.perf_counter() # marca o tempo inicial do chamamento da funcao
             insertion_sort(vetorCopia)
-            final = time.perf_counter()
-            tempoIns += (final - inicio)
+            final = time.perf_counter() # marca o tempo final do chamamento da funcao
+            tempoIns += (final - inicio) # guarda o tempo gasto para executar a funcao
 
+            # vetorCopia recebe os valores do vetor aleatorio
             vetorCopia = vetor.copy()
-            inicio = time.perf_counter()
+            inicio = time.perf_counter() # marca o tempo inicial do chamamento da funcao
             merge_sort(vetorCopia)
-            final = time.perf_counter()
-            tempoMer += (final - inicio)
+            final = time.perf_counter() # marca o tempo final do chamamento da funcao
+            tempoMer += (final - inicio) # guarda o tempo gasto para executar a funcao
 
+            # vetorCopia recebe os valores do vetor aleatorio
             vetorCopia = vetor.copy()
-            inicio = time.perf_counter()
+            inicio = time.perf_counter() # marca o tempo inicial do chamamento da funcao
             heap_sort(vetorCopia)
-            final = time.perf_counter()
-            tempoHeap += (final - inicio)
+            final = time.perf_counter() # marca o tempo final do chamamento da funcao
+            tempoHeap += (final - inicio) # guarda o tempo gasto para executar a funcao
 
+            # vetorCopia recebe os valores do vetor aleatorio
             vetorCopia = vetor.copy()
-            inicio = time.perf_counter()
+            inicio = time.perf_counter() # marca o tempo inicial do chamamento da funcao
             counting_sort(vetorCopia)
-            final = time.perf_counter()
-            tempoCount += (final - inicio)
+            final = time.perf_counter() # marca o tempo final do chamamento da funcao
+            tempoCount += (final - inicio) # guarda o tempo gasto para executar a funcao
 
         # Imprimir usando j para manter a progressão correta de n
+        # e dividir o tempo pelo número de repetições para obter a média
         print(f"{j}  {(tempoBub/rps):.6f}     {(tempoIns/rps):.6f}     {(tempoMer/rps):.6f}     {(tempoHeap/rps):.6f}    {(tempoQuick/rps):.6f}     {(tempoCount/rps):.6f}")
 
+
+
 def reverse(inc, fim, stp):
+
+    # print do cabeçalho dos dados do vetor reverso
     print("[[REVERSE]]")
     print("n      Bubble      Insertion       Merge       Heap        Quick       Counting")
     print("-------------------------------------------------------------------------------")
 
+    # laco para executar as linhas de acordo com o tamanho do vetor, onde j é o tamanho do vetor
     for j in range(inc, fim+1, stp):
 
         # Criar um vetor ordenado de forma decrescente: n, n-1, n-2, ..., 1
@@ -129,11 +144,12 @@ def reverse(inc, fim, stp):
         final = time.perf_counter()
         tempoCount = final - inicio
 
-        # Exibir resultados para o tamanho atual do vetor
+        # Exibir resultados para o tamanho atual do vetor (j)
         print(f"{j}  {(tempoBub):.6f}     {(tempoIns):.6f}     {(tempoMer):.6f}     {(tempoHeap):.6f}    {(tempoQuick):.6f}     {(tempoCount):.6f}")
 
 def sorted(inc, fim, stp):
 
+    # print do cabeçalho dos dados do vetor ordenado
     print("[[SORTED]]")
     print("n      Bubble      Insertion       Merge       Heap        Quick       Counting")
     print("-------------------------------------------------------------------------------")
@@ -188,11 +204,12 @@ def sorted(inc, fim, stp):
         final = time.perf_counter()
         tempoCount = final - inicio
 
-        # Exibir resultados para o tamanho atual do vetor
+        # Exibir resultados para o tamanho atual do vetor (j)
         print(f"{j}  {(tempoBub):.6f}     {(tempoIns):.6f}     {(tempoMer):.6f}     {(tempoHeap):.6f}    {(tempoQuick):.6f}     {(tempoCount):.6f}")
 
 def nearly(inc, fim, stp):
 
+    # print do cabeçalho dos dados do vetor quase ordenado
     print("[[NEARLY SORTED]]")
     print("n      Bubble      Insertion       Merge       Heap        Quick       Counting")
     print("-------------------------------------------------------------------------------")
@@ -200,7 +217,7 @@ def nearly(inc, fim, stp):
     for j in range(inc, fim+1, stp):
         
         # Criar vetor quase ordenado (90% ordenado)
-        vetor = [random.randint(0, j**2) for _ in range(j)]
+        vetor = [random.randint(0, j) for _ in range(j)]
         vetor = ordenar_90_porcento(vetor)
         
         # Inicializar as variáveis de tempo
@@ -248,18 +265,18 @@ def nearly(inc, fim, stp):
         final = time.perf_counter()
         tempoCount = final - inicio
 
-        # Exibir resultados para o tamanho atual do vetor
+        # Exibir resultados para o tamanho atual do vetor (j)
         print(f"{j}  {(tempoBub):.6f}     {(tempoIns):.6f}     {(tempoMer):.6f}     {(tempoHeap):.6f}    {(tempoQuick):.6f}     {(tempoCount):.6f}")
 
 
 
-my_random(inc, fim, stp, rps)
+#my_random(inc, fim, stp, rps)
 print()
 print()
-reverse(inc, fim, stp)
+#reverse(inc, fim, stp)
 print()
 print()
 sorted(inc, fim, stp)
 print()
 print()
-nearly(inc, fim, stp)
+#nearly(inc, fim, stp)
