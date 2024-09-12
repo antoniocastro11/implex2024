@@ -1,20 +1,21 @@
+#Bibliotecas necessárias
 import random
+
+# ALGORITMOS DE ORDENAÇÃO
+
 # ALGORITMO DE ORDENAÇÃO COUNTINGSORT
 def counting_sort(arr):
     if len(arr) == 0:  # Verificar se o array não está vazio
         return arr
     
-    # Encontrar o valor máximo no array
     max_val = max(arr)
     
-    # Inicializar o array de contagem
     count = [0] * (max_val + 1)
     
-    # Contar as ocorrências de cada valor
+
     for num in arr:
         count[num] += 1
-    
-    # Reconstruir o array original ordenado
+
     index = 0
     for i in range(len(count)):
         while count[i] > 0:
@@ -94,25 +95,17 @@ def insertion_sort(arr):
             j -= 1
         arr[j+1] = chave
 
-# Teste do algoritmo
-vetor = [4, 2, 6, 8, 1, 3, 7, 5]
-insertion_sort(vetor)
-print("Vetor ordenado:")
-print(vetor)
 
-# ALGORITMO DE ORDENAÇÃO BUBBLESORT
+# ALGORITMO DE ORDENAÇÃO BUBBLESORT 
 def bubble_sort(arr):
     n = len(arr)
-    for i in range(n-1):
-        for j in range(0, n-i-1):
-            if arr[j] > arr[j+1]:
-                arr[j], arr[j+1] = arr[j+1], arr[j]
 
-# Teste do algoritmo
-vetor = [4, 2, 6, 8, 1, 3, 7, 5]
-bubble_sort(vetor)
-print("Vetor ordenado:")
-print(vetor)
+    for i in range(n-1):
+        for j in range(n-1-i):
+            if arr[j] > arr[j+1]:
+                aux = arr[j]
+                arr[j] = arr[j+1]
+                arr[j+1] = aux
 
 
 # ALGORITMO DE ORDENAÇÃO QUICKSORT
@@ -139,22 +132,17 @@ def quick_sort(arr, baixo, alto):
         quick_sort(arr, pi + 1, alto)
 
 
-
 ##############################################################################################################
-
+# ORDENAÇÃO DO VETOR NEARLY
 def ordenar_90_porcento(vetor):
-    # Calcular 90% do comprimento do vetor
     tamanho_vetor = len(vetor)
     tamanho_ordem = int(tamanho_vetor * 0.9)
     
-    # Dividir o vetor em duas partes
     parte_a_ser_ordenada = vetor[:tamanho_ordem]
     parte_inalterada = vetor[tamanho_ordem:]
     
-    # Ordenar a parte que precisa ser ordenada
     parte_a_ser_ordenada.sort()
     
-    # Combinar as duas partes
     vetor_ordenado = parte_a_ser_ordenada + parte_inalterada
     
     return vetor_ordenado

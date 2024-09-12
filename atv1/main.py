@@ -32,7 +32,7 @@ def my_random(inc, fim, stp, rps):
 
         for i in range(rps):
             # Gerar números no intervalo [0, j^2]
-            vetor = [random.randint(0, j*j) for _ in range(j)]  
+            vetor = [random.randint(0, j) for _ in range(j)]  
             tempoBub = tempoQuick = tempoIns = tempoMer = tempoHeap = tempoCount = 0
 
             vetorCopia = vetor.copy()
@@ -200,7 +200,7 @@ def nearly(inc, fim, stp):
     for j in range(inc, fim+1, stp):
         
         # Criar vetor quase ordenado (90% ordenado)
-        vetor = [random.randint(0, j**2) for _ in range(j)]
+        vetor = [random.randint(0, j) for _ in range(j)]
         vetor = ordenar_90_porcento(vetor)
         
         # Inicializar as variáveis de tempo
