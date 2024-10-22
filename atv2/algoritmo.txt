@@ -1,0 +1,52 @@
+Uma empresa compra longas toras de madeira e as corta em pedaços menores para revenda.
+Os cortes são realizados de tal modo que os pedaços resultantes têm sempre comprimento inteiro.
+Um corte não tem valor e não é cobrado pela empresa. Para cada i = 1, 2, . . ., a empresa cobra o
+preço pi por uma tora de comprimento i.
+
+Como exemplo, suponha que temos uma tora de comprimento 10 metros com os valores dos
+seus pedaços de 1 a 10 metros dados pela seguinte tabela:
+
+comprimento i   :   1   2   3   4   5   6   7   8   9   10
+preco pi        :   1   5   8   9   10  17  17  20  24  30
+
+Problema do corte da tora de madeira: Dadas uma tora de n metros de comprimento
+e uma tabela de preços pi para i = 1, 2, . . . , n, determine o valor máximo de venda rn
+que é possível obter pelo corte da tora e venda de seus pedaços.
+
+Nesta atividade, você tem de implementar dois algoritmos para o problema do corte das toras
+de madeira:
+• um usando programação dinâmica (um dos algoritmos visto em aula - bottom up ou top down
+with memoization) e;
+• outro usando uma estratégia gulosa (greedy) descrita a seguir
+
+Estratégia gulosa para o problema do curte da tora de madeira: Defina a densidade de uma tora
+de comprimento i como pi/i, isto é, seu valor por metro. A estratégia gulosa para uma tora de
+comprimento n corta um primeiro pedaço de comprimento i, onde 1 ≤ i ≤ n, com densidade
+máxima. Continua-se então aplicando a estratégia gulosa ao pedaço remascente de comprimento
+n − i.
+
+A estratégia gulosa nem sempre encontra a solução ótima para este problema. De fato, o
+Exercício 15.1-2 do livro CLRS1 pede para mostrar um contra-exemplo em que esta estratégia
+falha ao tentar encontrar uma solução ótima.
+
+Considere os seguintes parâmetros para execução dos experimentos, que são fornecidos como
+entrada:
+• inc é o tamanho inicial da entrada;
+• fim é o tamanho final;
+• stp é o intervalo entre dois tamanhos de entrada
+
+    Você deve construir conjuntos de dados de entrada (pseudo)aleatórios da seguinte forma.
+    Por exemplo, para inc = 1000, fim = 20000 e stp = 1000 os comprimentos devem ser n =
+    1000, 2000, 3000, . . . , 20000. Para cada valor n do comprimento de uma tora, você deve determinar
+    os preços de venda dos pedaços da tora de comprimentos inteiros de 1 a n. Limite os preços dos
+    pedaços de uma tora no intervalo [1, n]. O vetor de preços deve estar ordenado em ordem não decrescente. 
+    Depois disso, você deve executar os algoritmos propostos, mostrando o valor total de
+venda obtidos por cada um e registrar seus tempos de execução. Ao final, mostre a porcentagem
+de acerto que a solução gulosa obtém em relação à solução da programação dinâmica.
+
+Um pequeno exemplo, para casos de teste com n = 1000, 2000, . . . , 20000 é mostrado a seguir.
+Os tempos de execução dos algoritmos são mostrados em segundos. Os valores vDP e tDP indicam o valor total 
+da venda obtido pelo algoritmo de programação dinâmica e o tempo de execução
+do algoritmo em segundos, respectivamente. Os valores vGreedy e tGreedy fazem as mesmas
+referências ao algoritmo guloso. Na última coluna temos a porcentagem de acerto da solução
+gulosa em relação à solução da programação dinâmica.
