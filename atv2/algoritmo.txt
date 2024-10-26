@@ -10,7 +10,7 @@ comprimento i   :   1   2   3   4   5   6   7   8   9   10
 preco pi        :   1   5   8   9   10  17  17  20  24  30
 
 Problema do corte da tora de madeira: Dadas uma tora de n metros de comprimento
-e uma tabela de preços pi para i = 1, 2, . . . , n, determine o valor máximo de venda rn
+e uma tabela de preços pi para i = 1, 2, . . . , n, determine o valor máximo de venda
 que é possível obter pelo corte da tora e venda de seus pedaços.
 
 Nesta atividade, você tem de implementar dois algoritmos para o problema do corte das toras
@@ -19,7 +19,7 @@ de madeira:
 with memoization) e;
 • outro usando uma estratégia gulosa (greedy) descrita a seguir
 
-Estratégia gulosa para o problema do curte da tora de madeira: Defina a densidade de uma tora
+Estratégia gulosa para o problema do corte da tora de madeira: Defina a densidade de uma tora
 de comprimento i como pi/i, isto é, seu valor por metro. A estratégia gulosa para uma tora de
 comprimento n corta um primeiro pedaço de comprimento i, onde 1 ≤ i ≤ n, com densidade
 máxima. Continua-se então aplicando a estratégia gulosa ao pedaço remascente de comprimento

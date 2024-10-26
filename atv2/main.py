@@ -1,5 +1,9 @@
 import random
 import time
+import sys
+
+# aumentando limite de recurção utilizando a biblioteca sys
+sys.setrecursionlimit(150000000)
 
 '''def partition(arr, baixo, alto):
     rand_index = random.randint(baixo, alto)
@@ -22,6 +26,35 @@ def quick_sort(arr, baixo, alto):
         pi = partition(arr, baixo, alto)
         quick_sort(arr, baixo, pi - 1)
         quick_sort(arr, pi + 1, alto)'''
+
+def corte_guloso_tora(precos, n):
+    # Caso base: se n for 0, não há mais cortes a serem feitos
+    if n == 0:
+        return 0, 0  # Retorna valor 0 e tempo 0
+
+    # Calcula a densidade (preço por metro) para cada comprimento
+    densidades = [0] * (n + 1)
+    for i in range(1, n + 1):
+        densidades[i] = precos[i - 1] / i  # os preços são indexados a partir de 0
+
+    # Encontra o corte com a densidade máxima
+    densidade_maxima = float('-inf')
+    melhor_comprimento = 0
+    
+    inicio = time.perf_counter()
+    for i in range(1, n + 1):
+        if densidades[i] > densidade_maxima:
+            densidade_maxima = densidades[i]
+            melhor_comprimento = i
+            
+    final = time.perf_counter()
+    tempo = final - inicio
+    
+    # Faz o corte e continua com o restante
+    valor_corte = precos[melhor_comprimento - 1]
+    valor_restante, _ = corte_guloso_tora(precos, n - melhor_comprimento)
+
+    return valor_corte + valor_restante, tempo
 
 def cortar_tora(precos, n):
     # Cria um vetor para armazenar o valor máximo para cada comprimento
@@ -58,15 +91,18 @@ def main():
     stp = 1000
 
 
-    print("    n         vDP         tDP    ")
-    print("---------------------------------")
+    print("    n         vDP         tDP         vGreedy      tGreedy      %")
+    print("------------------------------------------------------------------")
 
     for j in range(inc, fim+1, stp):
         # j  sera o tamanho do vetor
         vetor = [random.randint(0, j) for _ in range(j)]
         vetor.sort()
         vDP, tDP = cortar_tora(vetor, j)
-        print(f"{j:6.0f}     {vDP:6.0f}     {tDP:.6f}")
+        vGreedy, tGreedy = corte_guloso_tora(vetor, j)
+        porcentagem = vGreedy * 100 / vDP
+
+        print(f"{j:6.0f}     {vDP:6.0f}     {tDP:.6f}     {vGreedy:6.0f}     {tGreedy:.6f}     {porcentagem:.2f}")
 
 
 
