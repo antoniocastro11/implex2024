@@ -1,32 +1,25 @@
 import random
 import time
-import sys
 
-# aumentando limite de recurção utilizando a biblioteca sys
-sys.setrecursionlimit(150000)
 
 def corte_guloso(precos, n):
-    # Caso base: se n for 0, não há mais cortes a serem feitos
-    if n == 0:
-        return 0  # Retorna valor 0
+    valor_total = 0
+    comprimento_restante = n
 
-    # Encontra o corte com a densidade máxima
-    densidade_maxima = float(0)
-    melhor_comprimento = 0
+    while comprimento_restante > 0:
+        melhor_densidade = 0
+        melhor_comprimento = 0
+        
+        for i in range(1, comprimento_restante + 1):
+            densidade = precos[i - 1] / i
+            if densidade > melhor_densidade:
+                melhor_densidade = densidade
+                melhor_comprimento = i
 
-    # Calcula a densidade (preço por metro) para cada comprimento
-    for i in range(1, n + 1):
-        densidade = precos[i - 1] / i
-        if densidade > densidade_maxima:
-            densidade_maxima = densidade
-            melhor_comprimento = i
+        valor_total += precos[melhor_comprimento - 1]
+        comprimento_restante -= melhor_comprimento
 
-    
-    # Faz o corte e continua com o restante
-    valor_corte = precos[melhor_comprimento - 1]
-    valor_restante, = corte_guloso(precos, n - melhor_comprimento),
-
-    return valor_corte + valor_restante
+    return valor_total
 
 
 
@@ -46,7 +39,8 @@ def corte_dinamico(precos, n):
 
 
 def gerar_precos(n):
-    precos = sorted(random.randint(1, n) for _ in range(n))
+    precos = [random.randint(1, n) for i in range(n)]
+    precos.sort()
     return precos
 
 
@@ -71,7 +65,6 @@ def main():
     for j in range(inc, fim+1, stp):
 
         vetor = gerar_precos(j)
-        vetor.sort()
 
         inicioDP = time.perf_counter()
         vDP = corte_dinamico(vetor, j)
@@ -85,8 +78,7 @@ def main():
 
         porcentagem = vGreedy * 100 / vDP
 
-        print(f"{j:6.0f}     {vDP:6.0f}     {tDP:.6f}     {vGreedy:6.0f}     {tGreedy:.6f}     {porcentagem:.2f}")
-
+        print(f"{j:6.0f}     {vDP:7.0f}     {tDP:.6f}     {vGreedy:7.0f}     {tGreedy:.6f}     {porcentagem:.2f}")
 
 
 main()
