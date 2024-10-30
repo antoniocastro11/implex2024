@@ -1,3 +1,4 @@
+#Alunos: Antonio Galvan Castro e João Pedro da Cruz Silva de Camargo
 import random
 import time
 
